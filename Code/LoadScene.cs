@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-public class GameEnterManager : MonoBehaviour
+public class MyClass : MonoBehaviour
 {
     [SerializeField] private GameObject loadingPagePanel;
     [SerializeField] private Slider loadingToMenuScene;

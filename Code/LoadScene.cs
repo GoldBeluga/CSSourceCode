@@ -1,6 +1,4 @@
-//Thank for Brackeys
-
-
+//Thank for Brackeyss
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

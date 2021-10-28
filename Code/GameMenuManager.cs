@@ -20,7 +20,7 @@ public class GameMenuManager : MonoBehaviour
     private const string gemStringKey = "gem";
     private const string moneyStirngKey = "money";
     private const string isDoneStringKey = "isDone";
-    private bool quitButtonClicked;
+    private bool quitButtonClicked = true;
     void Start()
     {
         main.SetActive(false);

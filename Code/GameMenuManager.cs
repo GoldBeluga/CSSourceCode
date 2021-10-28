@@ -4,9 +4,9 @@ using UnityEngine.SceneManagement;
 
 public class GameMenuManager : MonoBehaviour
 {
-    //Main Code
+    /*Main Code*/
 
-    //Main variable
+    /*Main variable*/
     [SerializeField] private GameObject main;
     [SerializeField] private Text moneyText;
     [SerializeField] private Text gemText;

@@ -21,7 +21,7 @@ public class GameMenuManager : MonoBehaviour
     private const string moneyStirngKey = "money";
     private const string isDoneStringKey = "isDone";
     private const string welcomeStringKey = "welcome";
-    private bool quitButtonClicked = true;
+    private bool quitButtonClicked;
     private Shop shop;
     private int? welcomeInt;
     void Start()

@@ -20,11 +20,22 @@ public class GameMenuManager : MonoBehaviour
     private const string gemStringKey = "gem";
     private const string moneyStirngKey = "money";
     private const string isDoneStringKey = "isDone";
+    private const string welcomeStringKey = "welcome";
     private bool quitButtonClicked = true;
+    private Shop shop;
+    private int? welcomeInt;
     void Start()
     {
-        main.SetActive(false);
-        welcomePanel.SetActive(true);
+        welcomeInt = PlayerPrefs.GetInt(welcomeStringKey);
+        if ((welcomeInt ?? 0) == 0)
+        {
+            welcomePanel.SetActive(true);
+        }
+        else if (welcomeInt == 1)
+        {
+            main.SetActive(true);
+            welcomePanel.SetActive(false);
+        }
         bool quitButtonClicked = false;
         this.quitButtonClicked = quitButtonClicked;
         confirmQuit.gameObject.SetActive(false);
@@ -35,10 +46,9 @@ public class GameMenuManager : MonoBehaviour
         int gem = PlayerPrefs.GetInt(gemStringKey);
         int shopMoney = PlayerPrefs.GetInt(moneyStirngKey);
         int shopGem = PlayerPrefs.GetInt(gemStringKey);
-        Debug.Log(money + "" + gem);
         this.Gem = shopGem;
         this.Money = shopMoney;
-        Debug.Log("Shop" + shopMoney + "" + shopGem);
+        Debug.Log("shop" + shopMoney + "" + shopGem);
         moneyText.text = "Gold :" + this.Money.ToString();
         gemText.text = "Gem : " + this.Gem.ToString();
         switch (isDone)
@@ -83,6 +93,7 @@ public class GameMenuManager : MonoBehaviour
     {
         PlayerPrefs.SetInt(gemStringKey, Money);
         PlayerPrefs.SetInt(moneyStirngKey, Gem);
+        PlayerPrefs.SetInt(welcomeStringKey, 0);
         Application.Quit();
     }
 
@@ -105,6 +116,7 @@ public class GameMenuManager : MonoBehaviour
     {
         if (!quitButtonClicked)
         {
+            PlayerPrefs.SetInt(welcomeStringKey, 1);
             SceneManager.LoadScene(2);
         }
     }

@@ -1,5 +1,5 @@
     /*Set Method*/
-    private static void set_true_and_true(string boolean_stirng_key, bool true_or_false)
+    private static void set_true_or_false(string boolean_stirng_key, bool true_or_false)
     {
         if (!true_or_false)
         {

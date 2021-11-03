@@ -11,7 +11,7 @@ private static void set_true_and_true(string boolean_stirng_key, bool true_or_fa
         }
     }
 /*Get Method*/
-    private static bool get_true_or_false(string boolean_stirng_key)
+private static bool get_true_or_false(string boolean_stirng_key)
     {
         if (PlayerPrefs.GetInt(boolean_stirng_key) == 0)
         {

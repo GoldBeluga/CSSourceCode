@@ -21,7 +21,7 @@ Although this is a good `method`, but this code is too long, we can keep it shor
 ```cs
 private static bool my_method(int i)
 {
-return i == 0;
+    return i == 0;
 }
 ```
 Code explanation:

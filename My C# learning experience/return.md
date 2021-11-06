@@ -28,7 +28,7 @@ Code explanation:
 if `i == 0` return true, else return false.
 
 ### `Simplest Code`
-You can use lambda experssion to simpler the code: change to You can use a lambda expression to simplify the code
+You can use a Lambda expression to simplify the code
 ```cs
 private static bool my_lambda(int i) => i == 0;
 ```

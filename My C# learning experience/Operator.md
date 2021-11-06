@@ -37,7 +37,7 @@ Explanation : It wiil print `1` because use put `++` after `i`, so the variable 
 
 <p align="center">
 Coming Soon
-</p>
+<p>
 
 
 

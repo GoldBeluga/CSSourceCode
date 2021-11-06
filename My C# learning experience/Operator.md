@@ -7,19 +7,19 @@
 |`*`|Multiplication|`x * 1`|
 |`/`|Division|`x / 1`|
 |`%`|Reminder|`x % 1`|
-|`++`|Add `1` before or after using the variable|
-|`--`|Subtract `1` before or after using the varible||
-|`+=`|Add a number||
-|`-=`|Subtract a number||
-|`*=`|Product a number||
-|`/=`|Divide a number||
-|`%=`|Remind a number||
+|`++`|Add `1` before or after using the variable|Refer Below|
+|`--`|Subtract `1` before or after using the varibleRefer Below||
+|`+=`|Add a number|Refer Below|
+|`-=`|Subtract a number|Refer Below|
+|`*=`|Product a number|Refer Below|
+|`/=`|Divide a number|Refer Below|
+|`%=`|Remind a number|Refer Below|
 |`<=`|Check the value on the right is smaller than or equal to the value on the left||
 |`>=`|Check the value on the right is greater than or equal to the value on the left||
 |`=>`|Lambda expression|[Click here](https://github.com/Goldhahaha/Unity/blob/master/My%20C%23%20learning%20experience/return.md)|
 |`&&`|Logic And||
-|<code>&#124;&#124;</code>|Logic Or||
-|`!`|Logic Not||
+|<code>&#124;&#124;</code>|Logic Or|Refer Below|
+|`!`|Logic Not|Refer Below|
 </a>
 
 ## ++ 

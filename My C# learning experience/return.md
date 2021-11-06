@@ -27,7 +27,7 @@ private static bool my_method(int i)
 Code explanation:
 if `i == 0` return true, else return false.
 
-Simplest Code:
+### `Simplest Code`
 You can use lambda experssion to simpler ths code:
 ```cs
 private static bool my_lambda(int i) => i == 0;

@@ -1,14 +1,14 @@
     /*Set*/
-    private static void set_true_or_false(string boolean_stirng_key, bool true_or_false)
+    private static void set_boolean(string key, bool value)
     {
-        if (!true_or_false)
+        if (!value)
         {
-            PlayerPrefs.SetInt(boolean_stirng_key, 0);
+            PlayerPrefs.SetInt(key, 0);
         }
-        if (true_or_false)
+        if (value)
         {
-            PlayerPrefs.SetInt(boolean_stirng_key, 1);
+            PlayerPrefs.SetInt(key, 1);
         }
     }
     /*Get*/
-    private static bool get_true_or_false(string boolean_stirng_key) => PlayerPrefs.GetInt(boolean_stirng_key) == 1;
+    private static bool get_boolean(string key) => PlayerPrefs.GetInt(key) == 1;

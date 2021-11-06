@@ -16,7 +16,7 @@ private static bool my_method(int i)()
     }
 }
 ```
-Although this is a good `method`, but this code is too long, we can keep it shorter
+ the code is too long, and we can still keep it shorter
 ### `Shorter code`
 ```cs
 private static bool my_method(int i)

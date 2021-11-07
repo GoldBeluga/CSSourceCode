@@ -23,7 +23,7 @@
 </a>
 
 ## ++
-`++` is a operator that can add `1` before or after use the varaible.
+`++` is a operator that can add `1` before or after use the variable.
 
 Exp :
 ```cs
@@ -33,8 +33,20 @@ Console.WriteLine(i++);
 
 Output :`1`
 
-Explanation : It wiil print `1` because use put `++` after `i`, so the variable `i` wiil add `1` after print `i`. If there is `++i`, that is wiil print `2` because it wiil add `1` after print the value.
+Explanation : It wiil print `1` because `++` is after `i`, so the variable `i` wiil add `1` after print `i`. If there is `++i`, that is wiil print `2` because it wiil add `1` after print the value.
 
+## --
+`--` is a operator that can subtract `1` before or after use the variable
+
+Exp :
+```cs
+int i = 1;
+Console.WriteLine(i--);
+```
+
+Output :`1`
+
+Explanation : It wiil print `1` because `--` is after `i`, so the variable `i` wiil subtract `1` after print `i`. If there is `--i`, that is wiil print `0` because it wiil subtract `1` after print the value.
 <p align="center">
 Coming Soon
 <p>

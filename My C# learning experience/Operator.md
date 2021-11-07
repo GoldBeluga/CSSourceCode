@@ -50,6 +50,9 @@ Explanation : It wiil print `1` because `--` is after `i`, so the variable `i` w
 <p align="center">
 Coming Soon
 <p>
+  
+------
+© Copyright by Goldhahaha
 
 
 

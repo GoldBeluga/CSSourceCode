@@ -6,12 +6,12 @@ public class Shop : MonoBehaviour
 {
     void not_enough(Text not_enough_text, int hide_not_enough_time)
     {
-        not_enough_text.gameObject.SetActive(true);
         StartCoroutine(wait(hide_not_enough_time, not_enough_text));
     }
 
     IEnumerator wait(int sec, Text hide_not_enough_time)
     {
+        not_enough_text.gameObject.SetActive(true);
         yield return new WaitForSeconds(sec);
         hide_not_enough_time.gameObject.SetActive(false);
     }

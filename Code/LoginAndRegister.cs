@@ -58,12 +58,12 @@ public class LoginAndRegister : MonoBehaviour
                 if (login_account_password.text == PlayerPrefs.GetString(password[x]))
                 {
                     Debug.Log("Password is correct");
+                    break;
                 }
                 else
                 {
                     Debug.Log("password is wrong");
                 }
-                break;
             }
             else if (x == account_quantity - 1)
             {

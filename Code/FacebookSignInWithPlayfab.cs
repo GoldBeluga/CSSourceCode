@@ -2,7 +2,7 @@ using PlayFab;
 using PlayFab.ClientModels;
 using Facebook.Unity;
 
-public class FacebookSignInWithPlayfab
+public class FacebookSignInWithPlayfab : MonoBehaviour
 {
   void sign_in_with_facebook()
     {

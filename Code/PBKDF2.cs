@@ -3,98 +3,93 @@ using System.Security.Cryptography;
 using static System.Convert;
 using System;
 
-    public sealed class PBKDF2
+public sealed class PBKDF2
+{
+    static void Main()
     {
-        static void Main()
+        while (true)
         {
-            while (true)
+            Console.WriteLine("Encrypt Or Dencrypt? E /// D");
+            string? mode = Console.ReadLine();
+            bool modeb = false;
+            switch (mode.ToLower())
             {
-                Console.WriteLine("Encrypt Or Dencrypt? ENCRYPT /// DECRYPT");
-                string? mode = Console.ReadLine();
-                bool modeb = false;
-                switch (mode.ToLower())
+                case "e":
+                    modeb = true;
+                    break;
+                case "d":
+                    modeb = false;
+                    break;
+                default:
+                    Console.WriteLine("Invalid mode");
+                    Main();
+                    break;
+            }
+            if (modeb)
+            {
+                Console.WriteLine("Enter some password");
+                string? password = Console.ReadLine();
+                if (password == "")
                 {
-                    case "encrypt":
-                        modeb = true;
-                        break;
-                    case "decrypt":
-                        modeb = false;
-                        break;
-                    default:
-                        Console.WriteLine("Invalid mode");
-                        Main();
-                        break;
+                    Console.WriteLine("Password could not be empty");
                 }
-                if (modeb)
+                else
                 {
-                    Console.WriteLine("Enter some password");
-                    string? password = Console.ReadLine();
-                    if (password == "")
+                    byte[] salt = new byte[32];
+                    using (RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider())
                     {
-                        Console.WriteLine("Password could not be empty");
+                        rng.GetBytes(salt);
+                    }
+                    Console.WriteLine("Enter some data");
+                    string? dataToEncrypt = Console.ReadLine();
+                    Rfc2898DeriveBytes hash = new Rfc2898DeriveBytes(password, salt, 100000);
+                    Console.WriteLine("Secret Key Hex : " + ToHexString(hash.GetBytes(32)));
+                    Aes aes = Aes.Create();
+                    aes.Key = hash.GetBytes(32);
+                    MemoryStream encryptionStream = new MemoryStream();
+                    CryptoStream encrypt = new CryptoStream(encryptionStream, aes.CreateEncryptor(), CryptoStreamMode.Write);
+                    encrypt.Write(Encoding.UTF8.GetBytes(dataToEncrypt), 0, Encoding.UTF8.GetBytes(dataToEncrypt).Length);
+                    encrypt.FlushFinalBlock();
+                    encrypt.Close();
+                    hash.Reset();
+                    Console.WriteLine("IV Hex: " + ToHexString(aes.IV));
+                    Console.WriteLine("Salt Hex : " + ToHexString(salt));
+                    Console.WriteLine("Data before encrypt : " + dataToEncrypt + "\nData after encrypt : " + ToHexString(encryptionStream.ToArray()));
+                }
+                Console.WriteLine("------------------------------------------------------------");
+            }
+            if (!modeb)
+            {
+                Console.WriteLine("Enter some password");
+                string? password = Console.ReadLine();
+                if (password == "")
+                {
+                    Console.WriteLine("Password could not be empty");
+                }
+                else
+                {
+                    Console.WriteLine("Enter some salt");
+                    string? salt = Console.ReadLine();
+                    if (salt.Length != 64)
+                    {
+                        Console.WriteLine("Invalid salt");
                     }
                     else
                     {
-                        byte[] salt = new byte[32];
-                        using (RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider())
+                        Console.WriteLine("Enter some IV");
+                        string? IV = Console.ReadLine();
+                        if (IV.Length != 32)
                         {
-                            rng.GetBytes(salt);
-                            Console.WriteLine("Salt Hex : " + ToHexString(salt));
-                        }
-                        Console.WriteLine("Enter some data");
-                        string? dataToEncrypt = Console.ReadLine();
-                        Rfc2898DeriveBytes hash = new Rfc2898DeriveBytes(password, salt, 100000);
-                        Console.WriteLine("Hash key Hex : " + ToHexString(hash.GetBytes(32)));
-                        Aes aes = Aes.Create();
-                        aes.Key = hash.GetBytes(32);
-                        MemoryStream encryptionStream = new MemoryStream();
-                        CryptoStream encrypt = new CryptoStream(encryptionStream, aes.CreateEncryptor(), CryptoStreamMode.Write);
-                        encrypt.Write(Encoding.UTF8.GetBytes(dataToEncrypt), 0, Encoding.UTF8.GetBytes(dataToEncrypt).Length);
-                        encrypt.FlushFinalBlock();
-                        encrypt.Close();
-                        hash.Reset();
-                        Console.WriteLine("IV Hex: " + ToHexString(aes.IV));
-                        Console.WriteLine("Data before encrypt : " + dataToEncrypt + "\nData after encrypt : " + ToHexString(encryptionStream.ToArray()));
-                    }
-                }
-                if (!modeb)
-                {
-                    Console.WriteLine("Enter some password");
-                    string? password = Console.ReadLine();
-                    if (password == "")
-                    {
-                        Console.WriteLine("Password could not be empty");
-                    }
-                    else
-                    {
-                        Console.WriteLine("Enter some salt");
-                        string? salt = Console.ReadLine();
-                        if (salt.Length != 64)
-                        {
-                            Console.WriteLine("Invalid salt");
+                            Console.WriteLine("Invalid IV");
                         }
                         else
                         {
-                            Console.WriteLine("Enter some IV");
-                            string? IV = Console.ReadLine();
-                            if (IV.Length != 32)
-                            {
-                                Console.WriteLine("Invalid IV");
-                            }
-                            else
-                            {
-                                Console.WriteLine("Enter some data");
-                                string? data = Console.ReadLine();
-                                if (data.Length != 32)
-                                {
-                                    Console.WriteLine("Invalid data");
-                                }
-                                else
-                                {
+                            Console.WriteLine("Enter some data");
+                            string? data = Console.ReadLine();
                                 try
                                 {
                                     Rfc2898DeriveBytes hash = new Rfc2898DeriveBytes(password, FromHexString(salt), 100000);
-                                    Console.WriteLine("Hash key Hex: " + ToHexString(hash.GetBytes(32)));
+                                    Console.WriteLine("Secret Key Hex: " + ToHexString(hash.GetBytes(32)));
                                     Aes decryptAES = Aes.Create();
                                     decryptAES.Key = hash.GetBytes(32);
                                     decryptAES.IV = FromHexString(IV);
@@ -108,13 +103,13 @@ using System;
                                 }
                                 catch
                                 {
-                                    Console.WriteLine("Invalid password, salt, IV or data");
+                                    Console.WriteLine("Incorrect password, salt, IV or data");
                                 }
-                                }
-                            }
                         }
                     }
                 }
+                Console.WriteLine("------------------------------------------------------------");
             }
         }
     }
+}

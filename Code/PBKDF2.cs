@@ -21,13 +21,13 @@ public sealed class Class1
                     modeb = false;
                     break;
                 default:
-                    Console.WriteLine("Invalid mode");
+                    Console.WriteLine("------------------------------------------------------------\nInvalid mode");
                     Main();
                     break;
             }
             if (modeb)
             {
-                Console.WriteLine("Enter some password" + "\n------------------------------------------------------------");
+                Console.WriteLine("------------------------------------------------------------\nEnter some password" + "\n------------------------------------------------------------");
                 string? password = Console.ReadLine();
                 if (password == "")
                 {
@@ -40,10 +40,10 @@ public sealed class Class1
                     {
                         rng.GetBytes(salt);
                     }
-                    Console.WriteLine("Enter Plain Text" + "\n------------------------------------------------------------");
+                    Console.WriteLine("------------------------------------------------------------\nEnter Plain Text" + "\n------------------------------------------------------------");
                     string? dataToEncrypt = Console.ReadLine();
                     Rfc2898DeriveBytes hash = new Rfc2898DeriveBytes(password, salt, 100000);
-                    Console.WriteLine("\nSecret Key Base64 : " + ToBase64String(hash.GetBytes(32)) + "\n------------------------------------------------------------");
+                    Console.WriteLine("\nSecret Key Hex : " + ToHexString(hash.GetBytes(32)) + "\n------------------------------------------------------------");
                     Aes aes = Aes.Create();
                     aes.Key = hash.GetBytes(32);
                     MemoryStream encryptionStream = new MemoryStream();
@@ -52,15 +52,15 @@ public sealed class Class1
                     encrypt.FlushFinalBlock();
                     encrypt.Close();
                     hash.Reset();
-                    Console.WriteLine("IV Base64 : " + ToBase64String(aes.IV) + "\n------------------------------------------------------------");
-                    Console.WriteLine("Salt Base64 : " + ToBase64String(salt) + "\n------------------------------------------------------------");
-                    Console.WriteLine("Cipher Base64  : " + ToBase64String(encryptionStream.ToArray()) + "\n------------------------------------------------------------" + "\nPlain Text : " + dataToEncrypt);
+                    Console.WriteLine("IV Hex : " + ToHexString(aes.IV) + "\n------------------------------------------------------------");
+                    Console.WriteLine("Salt Hex : " + ToHexString(salt) + "\n------------------------------------------------------------");
+                    Console.WriteLine("Cipher Hex  : " + ToHexString(encryptionStream.ToArray()) + "\n------------------------------------------------------------" + "\nPlain Text : " + dataToEncrypt);
                 }
                 Console.WriteLine("------------------------------------------------------------");
             }
             if (!modeb)
             {
-                Console.WriteLine("Enter some password\n------------------------------------------------------------");
+                Console.WriteLine("------------------------------------------------------------\nEnter some password\n------------------------------------------------------------");
                 string? password = Console.ReadLine();
                 if (password == "")
                 {
@@ -68,43 +68,44 @@ public sealed class Class1
                 }
                 else
                 {
-                    Console.WriteLine("Enter some salt\n------------------------------------------------------------");
+                    Console.WriteLine("------------------------------------------------------------\nEnter some salt\n------------------------------------------------------------");
                     string? salt = Console.ReadLine();
-                    if (salt.Length != 44)
+
+                    if (salt.Length != 64)
                     {
                         Console.WriteLine("Invalid salt");
                     }
                     else
                     {
-                        Console.WriteLine("Enter some IV\n------------------------------------------------------------");
+                        Console.WriteLine("------------------------------------------------------------\nEnter some IV\n------------------------------------------------------------");
                         string? IV = Console.ReadLine();
-                        if (IV.Length != 24)
+                        if (IV.Length != 32)
                         {
                             Console.WriteLine("Invalid IV");
                         }
                         else
                         {
-                            Console.WriteLine("Enter Some Cipher Text\n------------------------------------------------------------");
+                            Console.WriteLine("------------------------------------------------------------\nEnter Some Cipher Text\n------------------------------------------------------------");
                             string? data = Console.ReadLine();
-                                try
-                                {
-                                    Rfc2898DeriveBytes hash = new Rfc2898DeriveBytes(password, FromBase64String(salt), 100000);
-                                    Console.WriteLine("Secret Key Base64: " + ToBase64String(hash.GetBytes(32)) + "\n------------------------------------------------------------");
-                                    Aes decryptAES = Aes.Create();
-                                    decryptAES.Key = hash.GetBytes(32);
-                                    decryptAES.IV = FromBase64String(IV);
-                                    MemoryStream decryptionStreamBacking = new MemoryStream();
-                                    CryptoStream decrypt = new CryptoStream(decryptionStreamBacking, decryptAES.CreateDecryptor(), CryptoStreamMode.Write);
-                                    decrypt.Write(FromBase64String(data), 0, FromBase64String(data).Length);
-                                    decrypt.Flush();
-                                    decrypt.Close();
-                                    hash.Reset();
-                                    Console.WriteLine("\nCipher Text : " + data + "\n------------------------------------------------------------\nPlain Text : " + Encoding.UTF8.GetString(decryptionStreamBacking.ToArray()));
-                                }
-                                catch
-                                {
-                                    Console.WriteLine("Incorrect password, salt, IV or data");
-                                }
+                            try
+                            {
+                                Rfc2898DeriveBytes hash = new Rfc2898DeriveBytes(password, FromHexString(salt), 100000);
+                                Console.WriteLine("------------------------------------------------------------\nSecret Key Hex: " + ToHexString(hash.GetBytes(32)) + "\n------------------------------------------------------------");
+                                Aes decryptAES = Aes.Create();
+                                decryptAES.Key = hash.GetBytes(32);
+                                decryptAES.IV = FromHexString(IV);
+                                MemoryStream decryptionStreamBacking = new MemoryStream();
+                                CryptoStream decrypt = new CryptoStream(decryptionStreamBacking, decryptAES.CreateDecryptor(), CryptoStreamMode.Write);
+                                decrypt.Write(FromHexString(data), 0, FromHexString(data).Length);
+                                decrypt.Flush();
+                                decrypt.Close();
+                                hash.Reset();
+                                Console.WriteLine("Cipher Text : " + data + "\n------------------------------------------------------------\nPlain Text : " + Encoding.UTF8.GetString(decryptionStreamBacking.ToArray()));
+                            }
+                            catch
+                            {
+                                Console.WriteLine("\n------------------------------------------------------------\nIncorrect password, salt, IV or data");
+                            }
                         }
                     }
                 }

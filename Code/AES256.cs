@@ -4,7 +4,7 @@ using static System.Convert;
 using System.IO;
 using System;
 
-public sealed class Class1
+public sealed class AES256
 {
     static void Main()
     {

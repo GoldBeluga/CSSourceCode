@@ -1,4 +1,4 @@
-/*Thank for Brackeys*/
+/*Code From Brackey*/
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

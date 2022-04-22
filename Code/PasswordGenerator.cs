@@ -30,12 +30,12 @@ public class PasswordGenerator
                 {
                     if (int.Parse(length) % 2 == 1)
                     {
-                        Console.WriteLine("Please enter an even number\n---------------------------------------------------------------");
+                        Console.WriteLine("---------------------------------------------------------------\nPlease enter an even number\n---------------------------------------------------------------");
                     }
                     else
                     {
                         byte[] b = new byte[int.Parse(length) / 2];
-                        using (RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider())
+                        using (RandomNumberGenerator rng = RandomNumberGenerator.Create())
                         {
                             rng.GetBytes(b);
                             Console.WriteLine("---------------------------------------------------------------\n" + ToHexString(b) + "\n---------------------------------------------------------------\n" + (int.Parse(length) / 2) + " Byte\n---------------------------------------------------------------");
@@ -55,7 +55,7 @@ public class PasswordGenerator
                 {
                     if (int.Parse(length) % 4 != 0)
                     {
-                        Console.WriteLine("Please enter 4 multiples number");
+                        Console.WriteLine("---------------------------------------------------------------\nPlease enter 4 multiples number\n---------------------------------------------------------------");
                     }
                     else
                     {
@@ -64,7 +64,7 @@ public class PasswordGenerator
                         if (int.Parse(bytev) == 0)
                         {
                             byte[] b = new byte[1 + (int.Parse(length) / 4 - 1) * 3];
-                            using (RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider())
+                            using (RandomNumberGenerator rng = RandomNumberGenerator.Create())
                             {
                                 rng.GetBytes(b);
                                 Console.WriteLine("---------------------------------------------------------------\n" + ToBase64String(b) + "\n---------------------------------------------------------------\n" + (1 + (int.Parse(length) / 4 - 1) * 3) + " Byte\n---------------------------------------------------------------");
@@ -73,7 +73,7 @@ public class PasswordGenerator
                         else if (int.Parse(bytev) == 1)
                         {
                             byte[] b = new byte[2 + (int.Parse(length) / 4 - 1) * 3];
-                            using (RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider())
+                            using (RandomNumberGenerator rng = RandomNumberGenerator.Create())
                             {
                                 rng.GetBytes(b);
                                 Console.WriteLine("---------------------------------------------------------------\n" + ToBase64String(b) + "\n---------------------------------------------------------------\n" + (2 + (int.Parse(length) / 4 - 1) * 3) + " Byte\n---------------------------------------------------------------");
@@ -82,7 +82,7 @@ public class PasswordGenerator
                         else if (int.Parse(bytev) == 2)
                         {
                             byte[] b = new byte[(int.Parse(length) / 4) * 3];
-                            using (RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider())
+                            using (RandomNumberGenerator rng = RandomNumberGenerator.Create())
                             {
                                 rng.GetBytes(b);
                                 Console.WriteLine("---------------------------------------------------------------\n" + ToBase64String(b) + "\n---------------------------------------------------------------\n" + ((int.Parse(length) / 4) * 3) + " Byte\n---------------------------------------------------------------");
